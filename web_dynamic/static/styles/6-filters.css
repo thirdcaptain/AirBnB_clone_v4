@@ -24,6 +24,7 @@
 
 .container .filters .amenities {
 	width: 25%;
+	position: relative;
 }
 
 input {
@@ -38,6 +39,7 @@ input {
 	border: none;
 	border-radius: 4px;
 	margin: auto 30px auto auto;
+	color: #fff;
 }
 
 .container .filters button:hover {
@@ -62,6 +64,8 @@ input {
 	font-weight: 400;
 	font-size: 14px;
 	margin: 7px 0 3px 40px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 /**
