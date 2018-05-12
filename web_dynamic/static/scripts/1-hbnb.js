@@ -11,7 +11,7 @@ $(document).ready(function () {
       list.push(index);
     });
     if (list.length === 0) {
-      $('.amenities h4').text('');
+      $('.amenities h4').html("&nbsp;");
     } else {
       $('.amenities h4').text(list.join(', '));
     }
