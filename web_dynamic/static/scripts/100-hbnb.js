@@ -1,14 +1,16 @@
 $(document).ready(function () {
-  let idDict = {};
-  // Listen for checkboxes to be checked
-  $('input:checkbox').change(function () {
+  let idDictAmenity = {};
+  let idDictCity = {};
+  let idDictState = {};
+  // Listen for checkboxes to be checked for Amenities
+  $('.amenities input:checkbox').change(function () {
     if ($(this).is(':checked')) {
-      idDict[$(this).attr('data-name')] = $(this).attr('data-id');
+      idDictAmenity[$(this).attr('data-name')] = $(this).attr('data-id');
     } else {
-      delete idDict[$(this).attr('data-name')];
+      delete idDictAmenity[$(this).attr('data-name')];
     }
     let list = [];
-    $.each(idDict, function (index, value) {
+    $.each(idDictAmenity, function (index, value) {
       list.push(index);
     });
     // Display items checked on the web page
@@ -18,6 +20,42 @@ $(document).ready(function () {
       $('.amenities h4').text(list.join(', '));
     }
   });
+
+  // Listen for checkboxes on States
+  $('input:checkbox[id="state"]').change(function () {
+    if ($(this).is(':checked')) {
+      idDictState[$(this).attr('data-name')] = $(this).attr('data-id');
+    } else {
+      delete idDictState[$(this).attr('data-name')];
+    }
+    appendText();
+  });
+
+  // Listen for checkboxes on Cities
+  $('input:checkbox[id="city"]').change(function () {
+    if ($(this).is(':checked')) {
+      idDictCity[$(this).attr('data-name')] = $(this).attr('data-id');
+    } else {
+      delete idDictCity[$(this).attr('data-name')];
+    }
+    appendText();
+  });
+
+  // Display items checked on the web page for City/State H4
+  function appendText () {
+    let list = [];
+    $.each(idDictCity, function (index) {
+      list.push(index);
+    });
+    $.each(idDictState, function (index) {
+      list.push(index);
+    });
+    if (list.length === 0) {
+      $('.locations h4').html('&nbsp;');
+    } else {
+      $('.locations h4').text(list.join(', '));
+    }
+  }
 
   // GET request for server status
   $.get('http://0.0.0.0:5001/api/v1/status', function (data) {
@@ -41,14 +79,17 @@ $(document).ready(function () {
   // Listen for click on filter button
   $('button').click(function () {
     let amenityList = [];
-    amenityList = $.map(idDict, function (value, key) { return value; });
-    console.log(amenityList);
+    let cityList = [];
+    let stateList = [];
+    stateList = $.map(idDictState, function (value, key) { return value; });
+    cityList = $.map(idDictCity, function (value, key) { return value; });
+    amenityList = $.map(idDictAmenity, function (value, key) { return value; });
     $.ajax({
       type: 'POST',
       url: 'http://0.0.0.0:5001/api/v1/places_search',
       contentType: 'application/json',
       dataType: 'json',
-      data: JSON.stringify({'amenities': amenityList}),
+      data: JSON.stringify({'amenities': amenityList, 'states': stateList, 'cities': cityList}),
       success: createPlaces
     });
   });
@@ -74,9 +115,9 @@ $(document).ready(function () {
       const bath = data[i].number_bathrooms;
       let place = `
       <ARTICLE>
-         <div class="title">
-	   <h2>${name}</h2>
-	   <div class="price_by_night">$${price}</div>
+        <div class="title">
+	      <h2>${name}</h2>
+	    <div class="price_by_night">$${price}</div>
          </div>
 	 <div class="information">
 	   <div class="max_guest">

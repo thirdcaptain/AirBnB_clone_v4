@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
   let idDict = {};
   $('input:checkbox').change(function () {
     if ($(this).is(':checked')) {
@@ -12,7 +11,7 @@ $(document).ready(function () {
       list.push(index);
     });
     if (list.length === 0) {
-      $('.amenities h4').html("&nbsp;");
+      $('.amenities h4').html('&nbsp;');
     } else {
       $('.amenities h4').text(list.join(', '));
     }
@@ -27,15 +26,15 @@ $(document).ready(function () {
   }, 'json');
 
   $.ajax({
-      type: 'POST',
-      url: 'http://0.0.0.0:5001/api/v1/places_search',
-      contentType: 'application/json',
-      dataType: 'json',
-      data: '{}',
-      success: create_places
-    });
+    type: 'POST',
+    url: 'http://0.0.0.0:5001/api/v1/places_search',
+    contentType: 'application/json',
+    dataType: 'json',
+    data: '{}',
+    success: createPlaces
+  });
 
-  function create_places (data) {
+  function createPlaces (data) {
     let places = [];
     console.log(data);
     for (let i in data) {
@@ -72,5 +71,4 @@ $(document).ready(function () {
     }
     $('.places').append(places);
   }
-
 });
