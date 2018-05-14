@@ -81,6 +81,11 @@
 	margin: 20px 0 5px 0;
 }
 
+.description {
+	margin-top: 15px;
+}
+
+
 @media screen and (max-width: 600px) {
 
 	.container .places .information {
