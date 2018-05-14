@@ -49,7 +49,7 @@ $(document).ready(function () {
   });
 
   function create_places (data) {
-    let places = '';
+    let places = [];
     console.log(data);
     for (let i in data) {
       const name = data[i].name;
@@ -57,31 +57,31 @@ $(document).ready(function () {
       const desc = data[i].description;
       const guest = data[i].max_guest;
       const bed = data[i].number_rooms;
-      const bath = data[i].bathrooms;
+      const bath = data[i].number_bathrooms;
       let place = `
       <ARTICLE>
-         <div class="price_title">
-	   <div class="article_title"><h2>${name}</h2></div>
-	   <div class="price_by_night"><div class="price">$${price}</div></div>
+         <div class="title">
+	   <h2>${name}</h2>
+	   <div class="price_by_night">$${price}</div>
          </div>
 	 <div class="information">
 	   <div class="max_guest">
-             <div class="guest_icon"></div>
-             <div class="guest_number"><h2>${guest} Guests</h2></div>
+             <i class="fa fa-users fa-3x" aria-hidden="true"></i>
+             <br>${guest} ${guest > 1 ? 'Guests' : 'Guest'}
            </div>
            <div class="number_rooms">
-             <div class="rooms_icon"></div>
-             <div class="rooms_number"><h2>${bed} Bedrooms</h2></div>            
+	     <i class="fa fa-bed fa-3x" aria-hidden="true"></i>
+             <br>${bed} ${bed > 1 ? 'Bedrooms' : 'Bedroom'}            
            </div>
            <div class="number_bathrooms">
-             <div class="bathrooms_icon"></div>
-             <div class="bathrooms_number"><h2>${bath} Bathrooms</h2></div>
+             <i class="fa fa-bath fa-3x" aria-hidden="true"></i>
+             <br>${bath} ${bath > 1 ? 'Bathrooms' : 'Bathroom'}
            </div>
 	 </div>
-         <div class="discription">${desc}</div>
+         <div class="description">${desc}</div>
       </ARTICLE>
       `;
-      places += place;
+      places.push(place);
     }
     $('.places').empty();
     $('.places').append(places);
