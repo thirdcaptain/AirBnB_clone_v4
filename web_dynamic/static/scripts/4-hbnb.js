@@ -1,5 +1,6 @@
 $(document).ready(function () {
   let idDict = {};
+  // Listen for checkboxes to be checked
   $('input:checkbox').change(function () {
     if ($(this).is(':checked')) {
       idDict[$(this).attr('data-name')] = $(this).attr('data-id');
@@ -10,6 +11,7 @@ $(document).ready(function () {
     $.each(idDict, function (index, value) {
       list.push(index);
     });
+    // Display items checked on the web page
     if (list.length === 0) {
       $('.amenities h4').html('&nbsp;');
     } else {
@@ -17,6 +19,7 @@ $(document).ready(function () {
     }
   });
 
+  // GET request for server status
   $.get('http://0.0.0.0:5001/api/v1/status', function (data) {
     if (data['status'] === 'OK') {
       $('DIV#api_status').addClass('available');
@@ -25,6 +28,7 @@ $(document).ready(function () {
     }
   }, 'json');
 
+  // POST request for initial web page load
   $.ajax({
     type: 'POST',
     url: 'http://0.0.0.0:5001/api/v1/places_search',
@@ -34,6 +38,7 @@ $(document).ready(function () {
     success: create_places
   });
 
+  // Listen for click on filter button
   $('button').click(function () {
     let amenityList = [];
     amenityList = $.map(idDict, function(value, key) { return value });
@@ -48,9 +53,18 @@ $(document).ready(function () {
     });
   });
 
+  // Load the places
   function create_places (data) {
     let places = [];
-    console.log(data);
+    
+    // Sort by name
+    data.sort(function(obj1, obj2) {
+      if (obj1.name < obj2.name) return -1;
+      if (obj1.name > obj2.name) return 1;
+      return 0;
+    });
+
+    // loops through the sorted array
     for (let i in data) {
       const name = data[i].name;
       const price = data[i].price_by_night;
@@ -83,7 +97,9 @@ $(document).ready(function () {
       `;
       places.push(place);
     }
+    // Remove previously appended data
     $('.places').empty();
+    // Append new data
     $('.places').append(places);
   }
 });
