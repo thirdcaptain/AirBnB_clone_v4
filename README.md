@@ -2,7 +2,7 @@
 
 # AirBnB Clone
 
-: API with Swagger
+Final Holberton Phase, Places Search Endpoint using JQuery
 
 ## Description
 
