@@ -2,7 +2,7 @@
 
 # AirBnB Clone
 
-Final Holberton Phase, Places Search Endpoint using JQuery
+Places Search Endpoint using JQuery
 
 ## Description
 
@@ -82,15 +82,15 @@ during maintanence or to scale the entire project.  The following files are the
 setupfiles along with a brief explanation:
 
 * **`dev/setup.sql`:** Drops test and dev databases, and then reinitializes
-the datbase.
+the database.
 
   * Usage: `$ cat dev/setup.sql | mysql -uroot -p`
 
-* **`setup_mysql_dev.sql`:** initialiezs dev database with mysql for testing
+* **`setup_mysql_dev.sql`:** initializes dev database with mysql for testing.
 
   * Usage: `$ cat setup_mysql_dev.sql | mysql -uroot -p`
 
-* **`setup_mysql_test.sql`:** initializes test database with mysql for testing
+* **`setup_mysql_test.sql`:** initializes test database with mysql for testing.
 
   * Usage: `$ cat setup_mysql_test.sql | mysql -uroot -p`
 
