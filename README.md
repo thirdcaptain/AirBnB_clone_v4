@@ -223,3 +223,12 @@ github repo
 ## License
 
 MIT License
+
+## Addtional Notes
+
+This version has ip addresses that work with my Windows based system.
+For example:
+In \AirBnB_clone_v4\web_dynamic\static\scripts\100-hbnb.js
+http://127.0.0.1:5001/api/v1/status
+instead of:
+http://0.0.0.0:5001/api/v1/status

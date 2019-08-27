@@ -58,7 +58,7 @@ $(document).ready(function () {
   }
 
   // GET request for server status
-  $.get('http://54.166.124.241/api/v1/status', function (data) {
+  $.get('http://127.0.0.1:5001/api/v1/status', function (data) {
     if (data['status'] === 'OK') {
       $('DIV#api_status').addClass('available');
     } else {
@@ -69,7 +69,7 @@ $(document).ready(function () {
   // POST request for initial web page load
   $.ajax({
     type: 'POST',
-    url: 'http://54.166.124.241/api/v1/places_search',
+    url: 'http://127.0.0.1:5001/api/v1/places_search',
     contentType: 'application/json',
     dataType: 'json',
     data: '{}',
@@ -86,7 +86,7 @@ $(document).ready(function () {
     amenityList = $.map(idDictAmenity, function (value, key) { return value; });
     $.ajax({
       type: 'POST',
-      url: 'http://54.166.124.241/api/v1/places_search',
+      url: 'http://127.0.0.1:5001/api/v1/places_search',
       contentType: 'application/json',
       dataType: 'json',
       data: JSON.stringify({'amenities': amenityList, 'states': stateList, 'cities': cityList}),
